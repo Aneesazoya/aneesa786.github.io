@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aneesa Z Nagarchi - Cybersecurity Engineer</title>
+    <title>Aneesa Z Nagarchi | Cybersecurity Engineer</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>tailwind.config={theme:{extend:{colors:{primary:'#00b4d8',secondary:'#7209b7'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#00ff9d',secondary:'#5c5cff'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
     <style>
         :where([class^="ri-"])::before { content: "\f3c2"; }
         
@@ -21,7 +20,8 @@
         }
         
         @keyframes blink {
-            50% { border-color: transparent }
+            0%, 100% { border-color: transparent }
+            50% { border-color: #00ff9d }
         }
         
         @keyframes glitch {
@@ -38,54 +38,21 @@
             100% { transform: translateY(100%) }
         }
         
-        @keyframes matrix-rain {
-            0% { top: -50%; }
-            100% { top: 110%; }
+        @keyframes matrix-effect {
+            0% { opacity: 0; transform: translateY(-20px); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(20px); }
         }
         
-        .matrix-bg {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .matrix-rain {
-            position: absolute;
-            color: rgba(0, 180, 216, 0.2);
-            font-family: 'Space Mono', monospace;
-            font-size: 1.2rem;
-            line-height: 1;
-            white-space: nowrap;
-            animation: matrix-rain 8s linear infinite;
-        }
-        
-        .typing-effect {
+        .typing-animation {
             overflow: hidden;
             white-space: nowrap;
-            border-right: 3px solid #00b4d8;
-            width: 0;
-            animation: typing 3.5s steps(40, end) forwards, blink 1s step-end infinite;
+            border-right: 2px solid #00ff9d;
+            animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
         }
         
-        .terminal-frame {
-            position: relative;
-            border: 1px solid rgba(0, 180, 216, 0.3);
-            background-color: rgba(0, 0, 0, 0.02);
-            overflow: hidden;
-        }
-        
-        .terminal-header {
-            background-color: rgba(0, 180, 216, 0.1);
-            padding: 0.5rem 1rem;
-            font-family: 'Space Mono', monospace;
-            color: #1f2937;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-        
-        .terminal-content {
-            padding: 1rem;
-            font-family: 'Space Mono', monospace;
+        .glitch-effect:hover {
+            animation: glitch 0.3s linear;
         }
         
         .scanline {
@@ -94,107 +61,109 @@
             left: 0;
             width: 100%;
             height: 10px;
-            background: linear-gradient(to bottom, rgba(0, 180, 216, 0.1), transparent);
+            background: rgba(0, 255, 157, 0.1);
             opacity: 0.3;
             animation: scanline 4s linear infinite;
-            pointer-events: none;
         }
         
-        .skill-bar {
-            height: 8px;
-            background-color: rgba(0, 180, 216, 0.2);
-            border-radius: 4px;
-            overflow: hidden;
+        .matrix-char {
+            position: absolute;
+            color: rgba(0, 255, 157, 0.7);
+            font-family: 'Fira Code', monospace;
+            animation: matrix-effect 3s linear infinite;
+        }
+        
+        .terminal-container {
             position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 157, 0.3);
         }
         
-        .skill-progress {
-            height: 100%;
-            background-color: #00b4d8;
-            border-radius: 4px;
+        .terminal-header {
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+        }
+        
+        .terminal-body {
+            background: rgba(10, 10, 15, 0.95);
+            overflow-y: auto;
+        }
+        
+        .terminal-prompt::before {
+            content: "> ";
+            color: #00ff9d;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: rgba(0, 255, 157, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
-            transition: width 1s ease-in-out;
+            height: 100%;
+            width: 30%;
+            background: #00ff9d;
+            animation: progress 2s infinite linear;
         }
         
-        .project-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 180, 216, 0.2);
-        }
-        
-        input, textarea, select {
-            background-color: rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0, 180, 216, 0.3);
-            transition: all 0.3s;
-        }
-        
-        input:focus, textarea:focus, select:focus {
-            border-color: #00b4d8;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2);
+        @keyframes progress {
+            0% { left: -30%; }
+            100% { left: 100%; }
         }
         
         .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid rgba(0, 255, 157, 0.5);
+            border-radius: 3px;
+            background: transparent;
             position: relative;
-            padding-left: 30px;
-            cursor: pointer;
-            display: inline-block;
-        }
-        
-        .custom-checkbox input {
-            position: absolute;
-            opacity: 0;
             cursor: pointer;
         }
         
-        .checkmark {
+        .custom-checkbox:checked {
+            background: #00ff9d;
+        }
+        
+        .custom-checkbox:checked::after {
+            content: "✓";
             position: absolute;
-            top: 0;
-            left: 0;
-            height: 20px;
-            width: 20px;
-            background-color: rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0, 180, 216, 0.3);
-            border-radius: 4px;
+            color: #000;
+            font-size: 14px;
+            top: -2px;
+            left: 3px;
         }
         
-        .custom-checkbox:hover input ~ .checkmark {
-            background-color: rgba(0, 180, 216, 0.1);
+        .custom-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 255, 157, 0.2);
+            border-radius: 2px;
+            outline: none;
         }
         
-        .custom-checkbox input:checked ~ .checkmark {
-            background-color: #00b4d8;
-        }
-        
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-        
-        .custom-checkbox input:checked ~ .checkmark:after {
-            display: block;
-        }
-        
-        .custom-checkbox .checkmark:after {
-            left: 7px;
-            top: 3px;
-            width: 6px;
-            height: 12px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #00ff9d;
+            cursor: pointer;
         }
         
         .custom-switch {
             position: relative;
             display: inline-block;
-            width: 50px;
+            width: 48px;
             height: 24px;
         }
         
@@ -211,1062 +180,852 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba(92, 92, 255, 0.2);
             transition: .4s;
-            border-radius: 34px;
+            border-radius: 24px;
         }
         
         .switch-slider:before {
             position: absolute;
             content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
             background-color: white;
             transition: .4s;
             border-radius: 50%;
         }
         
         input:checked + .switch-slider {
-            background-color: #00b4d8;
+            background-color: rgba(0, 255, 157, 0.7);
         }
         
         input:checked + .switch-slider:before {
-            transform: translateX(26px);
+            transform: translateX(24px);
         }
         
-        .custom-range {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 4px;
+        .project-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 157, 0.1);
+            border: 1px solid rgba(0, 255, 157, 0.5);
+        }
+        
+        .skill-bar {
+            height: 6px;
+            background: rgba(0, 255, 157, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: #00ff9d;
+            border-radius: 3px;
+        }
+        
+        body {
+            font-family: 'Fira Code', monospace;
+            background-color: #0a0a0f;
+            color: #e0e0e0;
+        }
+        
+        input, textarea {
+            background-color: rgba(30, 30, 40, 0.6);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            color: #e0e0e0;
+        }
+        
+        input:focus, textarea:focus {
+            border-color: #00ff9d;
             outline: none;
-        }
-        
-        .custom-range::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            background: #00b4d8;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-        .custom-range::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            background: #00b4d8;
-            border-radius: 50%;
-            cursor: pointer;
         }
     </style>
 </head>
-<body class="bg-white min-h-screen">
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+<body class="bg-black text-gray-200">
+    <div class="scanline"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black bg-opacity-80 backdrop-blur-sm z-50 border-b border-primary border-opacity-30">
+        <div class="container mx-auto px-6 py-3 flex items-center justify-between">
             <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full">
-                    <i class="ri-shield-keyhole-line ri-lg"></i>
+                <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                    <i class="ri-terminal-box-fill text-primary text-xl"></i>
                 </div>
-                <span class="text-xl font-bold text-gray-800">Aneesa Z</span>
+                <span class="text-primary font-bold">ANEESA.Z</span>
             </div>
             
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="text-gray-700 hover:text-primary transition-colors">About</a>
-                <a href="#skills" class="text-gray-700 hover:text-primary transition-colors">Skills</a>
-                <a href="#projects" class="text-gray-700 hover:text-primary transition-colors">Projects</a>
-                <a href="#experience" class="text-gray-700 hover:text-primary transition-colors">Experience</a>
-                <a href="#contact" class="text-gray-700 hover:text-primary transition-colors">Contact</a>
-            </nav>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-gray-300 hover:text-primary transition-colors duration-300">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-primary transition-colors duration-300">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-primary transition-colors duration-300">Projects</a>
+                <a href="#experience" class="text-gray-300 hover:text-primary transition-colors duration-300">Experience</a>
+                <a href="#contact" class="text-gray-300 hover:text-primary transition-colors duration-300">Contact</a>
+            </div>
             
-            <div class="md:hidden">
-                <button class="text-gray-700 hover:text-primary focus:outline-none !rounded-button">
-                    <div class="w-8 h-8 flex items-center justify-center">
-                        <i class="ri-menu-line ri-lg"></i>
-                    </div>
+            <div class="md:hidden flex items-center">
+                <button class="text-gray-300 hover:text-primary">
+                    <i class="ri-menu-line text-2xl"></i>
                 </button>
             </div>
         </div>
-    </header>
-    
-    <main>
-        <!-- Hero Section -->
-        <section class="relative overflow-hidden bg-gradient-to-r from-gray-50 to-gray-100 py-16 md:py-24">
-            <div class="absolute inset-0 opacity-5">
-                <div class="matrix-rain" style="left: 10%; animation-duration: 7s;">01001010110101001010</div>
-                <div class="matrix-rain" style="left: 20%; animation-duration: 8s;">10101001011010100101</div>
-                <div class="matrix-rain" style="left: 30%; animation-duration: 9s;">01010010110101001010</div>
-                <div class="matrix-rain" style="left: 40%; animation-duration: 6s;">10100101101010010101</div>
-                <div class="matrix-rain" style="left: 50%; animation-duration: 10s;">01001010110101001010</div>
-                <div class="matrix-rain" style="left: 60%; animation-duration: 7.5s;">10101001011010100101</div>
-                <div class="matrix-rain" style="left: 70%; animation-duration: 8.5s;">01010010110101001010</div>
-                <div class="matrix-rain" style="left: 80%; animation-duration: 9.5s;">10100101101010010101</div>
-                <div class="matrix-rain" style="left: 90%; animation-duration: 6.5s;">01001010110101001010</div>
-            </div>
-            
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-12">
-                    <div class="md:w-1/2">
-                        <div class="terminal-frame rounded-lg mb-6 max-w-lg">
-                            <div class="terminal-header">
-                                <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                                <span>system_boot.sh</span>
-                            </div>
-                            <div class="terminal-content bg-white">
-                                <div class="text-gray-800 font-mono">
-                                    <p class="typing-effect mb-2">> SYSTEM BOOT COMPLETE...</p>
-                                    <p class="typing-effect mb-2" style="animation-delay: 1s;">> WELCOME TO ANEESA Z NAGARCHI'S CYBER LAB</p>
-                                    <p class="typing-effect mb-2" style="animation-delay: 2s;">> Initiating neural sync... ⚡</p>
-                                    <p class="typing-effect mb-4" style="animation-delay: 3s;">>> Mission: Code. Secure. Innovate.</p>
-                                </div>
-                            </div>
-                            <div class="scanline"></div>
-                        </div>
-                        
-                        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Cybersecurity Engineer & AI Enthusiast</h1>
-                        <p class="text-lg text-gray-600 mb-8">Passionate about blending intelligence, innovation, and security into every line of code. From hacking deepfakes to deploying IoT-based surveillance systems.</p>
-                        
-                        <div class="flex flex-wrap gap-4">
-                            <a href="#contact" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition-all shadow-md hover:shadow-lg whitespace-nowrap">
-                                <div class="flex items-center gap-2">
-                                    <i class="ri-message-3-line"></i>
-                                    <span>Get in Touch</span>
-                                </div>
-                            </a>
-                            <a href="#projects" class="bg-white text-gray-800 px-6 py-3 rounded-button font-medium border border-gray-200 hover:border-primary hover:text-primary transition-all shadow-sm hover:shadow-md whitespace-nowrap">
-                                <div class="flex items-center gap-2">
-                                    <i class="ri-code-box-line"></i>
-                                    <span>View Projects</span>
-                                </div>
-                            </a>
-                        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-16 overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=futuristic%20cybersecurity%20lab%20with%20holographic%20displays%2C%20dark%20room%20with%20blue%20and%20green%20neon%20lights%2C%20digital%20interfaces%2C%20code%20scrolling%20on%20screens%2C%20high-tech%20environment%2C%20cyberpunk%20aesthetic%2C%20detailed%20and%20realistic&width=1920&height=1080&seq=1&orientation=landscape'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+        <div class="container mx-auto px-6 z-10">
+            <div class="max-w-3xl">
+                <div class="terminal-container rounded-lg overflow-hidden mb-6">
+                    <div class="terminal-header px-4 py-2 flex items-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="text-xs text-gray-400 ml-2">system_boot.sh</span>
                     </div>
-                    
-                    <div class="md:w-1/2">
-                        <div class="relative">
-                            <div class="absolute inset-0 bg-primary rounded-2xl opacity-10 blur-xl transform -rotate-6"></div>
-                            <div class="terminal-frame rounded-2xl overflow-hidden relative z-10 bg-white">
-                                <div class="terminal-header">
-                                    <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                                    <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                                    <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                                    <span>profile.json</span>
+                    <div class="terminal-body p-4">
+                        <div class="text-gray-300 text-sm mb-2">
+                            <span class="text-primary">> SYSTEM BOOT COMPLETE...</span>
+                        </div>
+                        <div class="text-gray-300 text-sm mb-2">
+                            <span class="text-primary">> WELCOME TO ANEESA Z NAGARCHI'S CYBER LAB</span>
+                        </div>
+                        <div class="text-gray-300 text-sm mb-2">
+                            <span class="text-primary">> Initiating neural sync... ⚡</span>
+                        </div>
+                        <div class="text-gray-300 text-sm mb-2">
+                            <span class="text-primary">>> Mission: Code. Secure. Innovate.</span>
+                        </div>
+                        <div class="progress-bar mt-2"></div>
+                    </div>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">
+                    <span class="typing-animation">Aneesa Z Nagarchi</span>
+                </h1>
+                <h2 class="text-xl md:text-2xl mb-6 text-primary">Cybersecurity Engineer | AI/ML Enthusiast | IoT Specialist</h2>
+                <p class="text-gray-300 mb-8 max-w-2xl">Passionate Computer Science Engineer blending intelligence, innovation, and security into every line of code. From hacking deepfakes to deploying IoT-based surveillance systems, I thrive at the intersection of future tech and ethical engineering.</p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="px-6 py-3 bg-primary text-black font-medium rounded-button hover:bg-opacity-80 transition-all duration-300 flex items-center whitespace-nowrap">
+                        <i class="ri-terminal-line mr-2"></i> Initialize Contact
+                    </a>
+                    <a href="#projects" class="px-6 py-3 bg-transparent border border-primary text-primary font-medium rounded-button hover:bg-primary hover:bg-opacity-10 transition-all duration-300 flex items-center whitespace-nowrap">
+                        <i class="ri-code-box-line mr-2"></i> View Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="terminal-container rounded-lg overflow-hidden mb-10">
+                <div class="terminal-header px-4 py-2 flex items-center space-x-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="text-xs text-gray-400 ml-2">about --user aneesa_z</span>
+                </div>
+                <div class="terminal-body p-4">
+                    <div class="text-gray-300 text-sm mb-4">
+                        <span class="text-primary">[STATUS: ACTIVE] [SECURITY CLEARANCE: LEVEL 7]</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="col-span-1">
+                            <div class="bg-black bg-opacity-50 p-6 rounded-lg border border-primary border-opacity-20 h-full">
+                                <div class="relative w-full aspect-square mb-4 overflow-hidden rounded-lg glitch-effect">
+                                    <img src="https://static.readdy.ai/image/bcae9ac127e65652b47ddbf6bbd47c49/cec344ce8963643b97557908dbd97e67.webp" alt="Aneesa Z Nagarchi" class="w-full h-full object-cover object-top">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-40"></div>
                                 </div>
-                                <div class="terminal-content p-6 bg-white">
-                                    <div class="flex flex-col md:flex-row gap-6 items-center">
-                                        <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-primary shadow-lg">
-                                            <img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20Indian%20woman%20with%20glasses%2C%20cybersecurity%20engineer%2C%20professional%20headshot%2C%20neutral%20background%2C%20looking%20confident%2C%20modern%20tech%20professional&width=300&height=300&seq=1&orientation=squarish" alt="Aneesa Z Nagarchi" class="w-full h-full object-cover object-top">
+                                <h3 class="text-xl font-bold text-primary mb-2">Aneesa Z Nagarchi</h3>
+                                <p class="text-gray-400 mb-4">Bengaluru, India</p>
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-map-pin-line text-primary"></i>
+                                    </div>
+                                    <span>Bengaluru, Karnataka</span>
+                                </div>
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-mail-line text-primary"></i>
+                                    </div>
+                                    <span>zoyaaneesa786@gmail.com</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-phone-line text-primary"></i>
+                                    </div>
+                                    <span>+91 9513817850</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-2">
+                            <div class="bg-black bg-opacity-50 p-6 rounded-lg border border-primary border-opacity-20 h-full">
+                                <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                                    <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-3">
+                                        <i class="ri-user-search-line text-primary"></i>
+                                    </div>
+                                    Profile Analysis
+                                </h3>
+                                
+                                <div class="mb-6">
+                                    <h4 class="text-lg font-medium text-primary mb-3">Bio:</h4>
+                                    <p class="text-gray-300 mb-4">Passionate Computer Science Engineer blending intelligence, innovation, and security into every line of code. From hacking deepfakes to deploying IoT-based surveillance systems, I thrive at the intersection of future tech and ethical engineering.</p>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                        <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-primary border-opacity-10">
+                                            <h5 class="text-sm font-medium text-primary mb-2">Languages</h5>
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">English</span>
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Hindi</span>
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Urdu</span>
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Kannada</span>
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Tamil (partial)</span>
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Telugu (partial)</span>
+                                            </div>
                                         </div>
-                                        <div class="flex-1">
-                                            <h2 class="text-2xl font-bold text-gray-800 mb-2">Aneesa Z Nagarchi</h2>
-                                            <p class="text-gray-600 mb-4">Bengaluru, India</p>
-                                            
-                                            <div class="grid grid-cols-2 gap-4">
-                                                <div>
-                                                    <p class="text-sm text-gray-500">Security Clearance</p>
-                                                    <p class="font-mono text-primary font-bold">LEVEL 7</p>
-                                                </div>
-                                                <div>
-                                                    <p class="text-sm text-gray-500">Status</p>
-                                                    <p class="font-mono text-green-500 font-bold">ACTIVE</p>
-                                                </div>
-                                                <div>
-                                                    <p class="text-sm text-gray-500">Languages</p>
-                                                    <p class="font-mono text-gray-700">5</p>
-                                                </div>
-                                                <div>
-                                                    <p class="text-sm text-gray-500">Projects</p>
-                                                    <p class="font-mono text-gray-700">12+</p>
-                                                </div>
+                                        <div class="bg-black bg-opacity-50 p-4 rounded-lg border border-primary border-opacity-10">
+                                            <h5 class="text-sm font-medium text-primary mb-2">Soft Protocols</h5>
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Critical Thinking</span>
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Collaboration</span>
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Comm Intelligence</span>
+                                                <span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Adaptive Leadership</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="scanline"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- About Section -->
-        <section id="about" class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto">
-                    <div class="terminal-frame rounded-lg mb-8">
-                        <div class="terminal-header">
-                            <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                            <span>> about --user aneesa_z</span>
-                        </div>
-                        <div class="terminal-content bg-white">
-                            <div class="text-gray-800 font-mono">
-                                <p class="mb-4">[STATUS: ACTIVE] [SECURITY CLEARANCE: LEVEL 7]</p>
-                                <p class="mb-2">Name: Aneesa Z Nagarchi</p>
-                                <p class="mb-2">Location: Bengaluru, India</p>
-                                <p class="mb-4">Role: Cybersecurity Engineer in Training | AI/ML Enthusiast | IoT Specialist</p>
-                                <p class="mb-2">Bio:</p>
-                                <p class="mb-2">> Passionate Computer Science Engineer blending intelligence, innovation, and security into every line of code.</p>
-                                <p>> From hacking deepfakes to deploying IoT-based surveillance systems, I thrive at the intersection of future tech and ethical engineering.</p>
-                            </div>
-                        </div>
-                        <div class="scanline"></div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
-                                <i class="ri-shield-line text-primary ri-xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Cybersecurity Focus</h3>
-                            <p class="text-gray-600">Specializing in threat detection, penetration testing, and building secure applications from the ground up. Passionate about staying ahead of emerging threats.</p>
-                        </div>
-                        
-                        <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
-                                <i class="ri-ai-generate text-primary ri-xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">AI/ML Expertise</h3>
-                            <p class="text-gray-600">Developing AI-powered security solutions and deep learning models for fraud detection. Created a transformer-based deepfake detection system with 93% accuracy.</p>
-                        </div>
-                        
-                        <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
-                                <i class="ri-device-line text-primary ri-xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">IoT Systems</h3>
-                            <p class="text-gray-600">Building secure IoT ecosystems with embedded AI capabilities. Developed a Raspberry Pi-based home security system with cloud integration and real-time alerts.</p>
-                        </div>
-                        
-                        <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
-                                <i class="ri-team-line text-primary ri-xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Collaborative Approach</h3>
-                            <p class="text-gray-600">Strong communication skills across 5 languages. Led sprint demos and created deployment SOPs that increased development speed by 15%.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Skills Section -->
-        <section id="skills" class="py-16 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto">
-                    <div class="terminal-frame rounded-lg mb-12">
-                        <div class="terminal-header">
-                            <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                            <span>> run --skills_matrix.analyze()</span>
-                        </div>
-                        <div class="terminal-content bg-white">
-                            <div class="text-gray-800 font-mono">
-                                <div class="border border-gray-200 rounded mb-4 p-4">
+                                
+                                <div class="mt-6">
+                                    <h4 class="text-lg font-medium text-primary mb-3">System Status:</h4>
                                     <div class="grid grid-cols-2 gap-4">
                                         <div>
-                                            <p class="mb-2 font-bold">LANGUAGES</p>
-                                            <p>Python, Java, C</p>
-                                            <p>HTML5, CSS3, JS</p>
+                                            <p class="text-gray-400 text-sm mb-1">Security Clearance</p>
+                                            <div class="flex items-center">
+                                                <div class="w-full bg-gray-700 rounded-full h-2 mr-2">
+                                                    <div class="bg-primary h-2 rounded-full" style="width: 70%"></div>
+                                                </div>
+                                                <span class="text-xs text-primary">Level 7</span>
+                                            </div>
                                         </div>
                                         <div>
-                                            <p class="mb-2 font-bold">TOOLS & PLATFORMS</p>
-                                            <p>Git, GitHub, VS Code</p>
-                                            <p>AWS, Ubuntu, MongoDB, SQL</p>
+                                            <p class="text-gray-400 text-sm mb-1">Mission Readiness</p>
+                                            <div class="flex items-center">
+                                                <div class="w-full bg-gray-700 rounded-full h-2 mr-2">
+                                                    <div class="bg-primary h-2 rounded-full" style="width: 90%"></div>
+                                                </div>
+                                                <span class="text-xs text-primary">90%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mb-2">► Soft Protocols Enabled:</p>
-                                <p class="mb-4">> Critical Thinking | Collaboration | Comm Intelligence | Adaptive Leadership</p>
-                                <p class="mb-2">► Terminal Languages Detected:</p>
-                                <p>> English | Hindi | Urdu | Kannada | (partial Tamil/Telugu)</p>
                             </div>
                         </div>
-                        <div class="scanline"></div>
                     </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-6">Technical Skills</h3>
-                            
-                            <div class="space-y-6">
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">Python</span>
-                                        <span class="text-sm text-gray-500">95%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 95%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">Java</span>
-                                        <span class="text-sm text-gray-500">85%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 85%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">Cybersecurity</span>
-                                        <span class="text-sm text-gray-500">90%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="terminal-container rounded-lg overflow-hidden mb-10">
+                <div class="terminal-header px-4 py-2 flex items-center space-x-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="text-xs text-gray-400 ml-2">run --skills_matrix.analyze()</span>
+                </div>
+                <div class="terminal-body p-4">
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg border border-primary border-opacity-20 mb-8">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                            <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-3">
+                                <i class="ri-code-box-line text-primary"></i>
+                            </div>
+                            Programming Languages
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <div class="mb-4">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-gray-300">Python</span>
+                                        <span class="text-xs text-primary">90%</span>
                                     </div>
                                     <div class="skill-bar">
                                         <div class="skill-progress" style="width: 90%"></div>
                                     </div>
                                 </div>
-                                
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">AI/ML</span>
-                                        <span class="text-sm text-gray-500">80%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 80%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">IoT Development</span>
-                                        <span class="text-sm text-gray-500">85%</span>
+                                <div class="mb-4">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-gray-300">Java</span>
+                                        <span class="text-xs text-primary">85%</span>
                                     </div>
                                     <div class="skill-bar">
                                         <div class="skill-progress" style="width: 85%"></div>
                                     </div>
                                 </div>
+                                <div class="mb-4">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-gray-300">C</span>
+                                        <span class="text-xs text-primary">75%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" style="width: 75%"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-6">Soft Skills</h3>
-                            
-                            <div class="space-y-6">
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">Critical Thinking</span>
-                                        <span class="text-sm text-gray-500">95%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 95%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">Collaboration</span>
-                                        <span class="text-sm text-gray-500">90%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 90%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">Communication</span>
-                                        <span class="text-sm text-gray-500">85%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 85%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">Problem Solving</span>
-                                        <span class="text-sm text-gray-500">95%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 95%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="font-medium text-gray-700">Adaptive Leadership</span>
-                                        <span class="text-sm text-gray-500">80%</span>
+                            <div>
+                                <div class="mb-4">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-gray-300">HTML5</span>
+                                        <span class="text-xs text-primary">80%</span>
                                     </div>
                                     <div class="skill-bar">
                                         <div class="skill-progress" style="width: 80%"></div>
                                     </div>
                                 </div>
+                                <div class="mb-4">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-gray-300">CSS3</span>
+                                        <span class="text-xs text-primary">75%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-gray-300">JavaScript</span>
+                                        <span class="text-xs text-primary">70%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" style="width: 70%"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mt-12">
-                        <h3 class="text-xl font-bold text-gray-800 mb-6">Technical Proficiency</h3>
-                        <div id="skills-chart" class="w-full h-80"></div>
+                    <div class="bg-black bg-opacity-50 p-6 rounded-lg border border-primary border-opacity-20">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                            <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-3">
+                                <i class="ri-tools-line text-primary"></i>
+                            </div>
+                            Tools & Platforms
+                        </h3>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-black bg-opacity-70 p-4 rounded-lg border border-primary border-opacity-10 flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-3">
+                                    <i class="ri-git-branch-line text-primary text-xl"></i>
+                                </div>
+                                <span class="text-sm">Git</span>
+                            </div>
+                            <div class="bg-black bg-opacity-70 p-4 rounded-lg border border-primary border-opacity-10 flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-3">
+                                    <i class="ri-github-fill text-primary text-xl"></i>
+                                </div>
+                                <span class="text-sm">GitHub</span>
+                            </div>
+                            <div class="bg-black bg-opacity-70 p-4 rounded-lg border border-primary border-opacity-10 flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-3">
+                                    <i class="ri-code-s-slash-line text-primary text-xl"></i>
+                                </div>
+                                <span class="text-sm">VS Code</span>
+                            </div>
+                            <div class="bg-black bg-opacity-70 p-4 rounded-lg border border-primary border-opacity-10 flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-3">
+                                    <i class="ri-cloud-line text-primary text-xl"></i>
+                                </div>
+                                <span class="text-sm">AWS</span>
+                            </div>
+                            <div class="bg-black bg-opacity-70 p-4 rounded-lg border border-primary border-opacity-10 flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-3">
+                                    <i class="ri-ubuntu-fill text-primary text-xl"></i>
+                                </div>
+                                <span class="text-sm">Ubuntu</span>
+                            </div>
+                            <div class="bg-black bg-opacity-70 p-4 rounded-lg border border-primary border-opacity-10 flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-3">
+                                    <i class="ri-database-2-line text-primary text-xl"></i>
+                                </div>
+                                <span class="text-sm">MongoDB</span>
+                            </div>
+                            <div class="bg-black bg-opacity-70 p-4 rounded-lg border border-primary border-opacity-10 flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-3">
+                                    <i class="ri-database-line text-primary text-xl"></i>
+                                </div>
+                                <span class="text-sm">SQL</span>
+                            </div>
+                            <div class="bg-black bg-opacity-70 p-4 rounded-lg border border-primary border-opacity-10 flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-3">
+                                    <i class="ri-terminal-box-line text-primary text-xl"></i>
+                                </div>
+                                <span class="text-sm">Shell</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- Projects Section -->
-        <section id="projects" class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="max-w-5xl mx-auto">
-                    <div class="terminal-frame rounded-lg mb-12">
-                        <div class="terminal-header">
-                            <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                            <span>> decrypt --projects.vault</span>
-                        </div>
-                        <div class="terminal-content bg-white">
-                            <div class="text-gray-800 font-mono">
-                                <p class="mb-4">█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█</p>
-                                <p class="mb-2">▶ HOME SECURITY SYSTEM [Hardware + Cloud] - status: DEPLOYED</p>
-                                <p class="mb-1">[✓] Motion detection via Raspberry Pi</p>
-                                <p class="mb-1">[✓] Reduced false alerts by 45%</p>
-                                <p class="mb-4">[✓] Automated cloud-linked alert system (−50% response time)</p>
-                                
-                                <p class="mb-2">▶ F2TRANS [Face Forgery Detector] - status: PUBLISHED</p>
-                                <p class="mb-1">[✓] Transformer + Fourier analysis = 93% Accuracy</p>
-                                <p class="mb-1">[✓] Beats CNN by +40% precision</p>
-                                <p class="mb-4">[✓] Featured on open-source AI hubs</p>
-                                
-                                <p class="mb-2">▶ COLLEGE MANAGEMENT SYSTEM [Java & J2EE] - status: SECURE</p>
-                                <p class="mb-1">[✓] Automated academic ops (+70% efficiency)</p>
-                                <p class="mb-1">[✓] Encrypted access control</p>
-                                <p class="mb-4">[✓] Real-time analytics for admins</p>
-                                <p>█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█</p>
-                            </div>
-                        </div>
-                        <div class="scanline"></div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="terminal-container rounded-lg overflow-hidden mb-10">
+                <div class="terminal-header px-4 py-2 flex items-center space-x-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="text-xs text-gray-400 ml-2">decrypt --projects.vault</span>
+                </div>
+                <div class="terminal-body p-4">
+                    <div class="text-gray-300 text-sm mb-4">
+                        <span class="text-primary">█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█</span>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="project-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="h-48 overflow-hidden">
-                                <img src="https://readdy.ai/api/search-image?query=home%20security%20system%20with%20raspberry%20pi%20camera%2C%20motion%20detection%2C%20smart%20home%20security%2C%20IoT%20device%20monitoring%20a%20home%20entrance%2C%20high-tech%20security%20system%20with%20clean%20modern%20design%2C%20digital%20interface%20showing%20security%20status&width=600&height=400&seq=2&orientation=landscape" alt="Home Security System" class="w-full h-full object-cover object-top">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="project-card bg-black bg-opacity-50 rounded-lg overflow-hidden">
+                            <div class="relative">
+                                <img src="https://readdy.ai/api/search-image?query=home%20security%20system%20with%20raspberry%20pi%20camera%2C%20motion%20detection%2C%20IoT%20devices%2C%20smart%20home%20security%20monitoring%2C%20digital%20interface%20showing%20alerts%2C%20modern%20technology%2C%20detailed%20and%20realistic&width=600&height=400&seq=3&orientation=landscape" alt="Home Security System" class="w-full h-48 object-cover object-top">
+                                <div class="absolute top-3 right-3 bg-primary text-black text-xs px-2 py-1 rounded-full">DEPLOYED</div>
                             </div>
                             <div class="p-6">
-                                <div class="flex justify-between items-center mb-3">
-                                    <h3 class="text-xl font-bold text-gray-800">Home Security System</h3>
-                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">DEPLOYED</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">An IoT-based home security system using Raspberry Pi for motion detection with cloud integration for real-time alerts.</p>
-                                <div class="space-y-2 mb-6">
-                                    <div class="flex items-start">
-                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                            <i class="ri-check-line"></i>
-                                        </div>
-                                        <p class="text-sm text-gray-600">Motion detection with 98% accuracy</p>
+                                <h3 class="text-lg font-bold text-white mb-3">HOME SECURITY SYSTEM</h3>
+                                <p class="text-gray-400 text-sm mb-4">Hardware + Cloud based security system with motion detection and automated alerts.</p>
+                                
+                                <div class="mb-4">
+                                    <div class="flex items-start space-x-2 mb-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Motion detection via Raspberry Pi</p>
                                     </div>
-                                    <div class="flex items-start">
-                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                            <i class="ri-check-line"></i>
-                                        </div>
-                                        <p class="text-sm text-gray-600">Reduced false alerts by 45%</p>
+                                    <div class="flex items-start space-x-2 mb-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Reduced false alerts by <span class="text-primary">45%</span></p>
                                     </div>
-                                    <div class="flex items-start">
-                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                            <i class="ri-check-line"></i>
-                                        </div>
-                                        <p class="text-sm text-gray-600">Cloud-linked alert system (−50% response time)</p>
+                                    <div class="flex items-start space-x-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Automated cloud-linked alert system (<span class="text-primary">−50%</span> response time)</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-between items-center">
-                                    <div class="flex space-x-2">
-                                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Python</span>
-                                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">IoT</span>
-                                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">AWS</span>
-                                    </div>
-                                    <a href="#" class="text-primary hover:text-primary-dark transition-colors">
-                                        <div class="w-8 h-8 flex items-center justify-center">
-                                            <i class="ri-external-link-line ri-lg"></i>
+                                
+                                <div class="flex justify-between items-center mt-6">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                            <i class="ri-raspberry-pi-line text-primary"></i>
                                         </div>
+                                        <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                            <i class="ri-cloud-line text-primary"></i>
+                                        </div>
+                                        <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                            <i class="ri-webcam-line text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="text-primary hover:underline text-sm flex items-center">
+                                        <span>View Details</span>
+                                        <i class="ri-arrow-right-line ml-1"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="project-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="h-48 overflow-hidden">
-                                <img src="https://readdy.ai/api/search-image?query=face%20forgery%20detection%20system%2C%20AI%20analyzing%20facial%20features%2C%20deepfake%20detection%20technology%2C%20computer%20vision%20system%20detecting%20fake%20faces%2C%20digital%20forensics%2C%20high-tech%20face%20analysis%20with%20data%20visualization%2C%20modern%20technology%20interface&width=600&height=400&seq=3&orientation=landscape" alt="F2TRANS Face Forgery Detector" class="w-full h-full object-cover object-top">
+                        <div class="project-card bg-black bg-opacity-50 rounded-lg overflow-hidden">
+                            <div class="relative">
+                                <img src="https://readdy.ai/api/search-image?query=face%20forgery%20detection%20technology%2C%20AI%20analyzing%20facial%20features%2C%20digital%20interface%20showing%20deepfake%20detection%2C%20computer%20vision%20technology%2C%20futuristic%20technology%2C%20detailed%20and%20realistic&width=600&height=400&seq=4&orientation=landscape" alt="F2TRANS" class="w-full h-48 object-cover object-top">
+                                <div class="absolute top-3 right-3 bg-primary text-black text-xs px-2 py-1 rounded-full">PUBLISHED</div>
                             </div>
                             <div class="p-6">
-                                <div class="flex justify-between items-center mb-3">
-                                    <h3 class="text-xl font-bold text-gray-800">F2TRANS</h3>
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">PUBLISHED</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">A transformer-based face forgery detection system that combines Fourier analysis for high-accuracy deepfake detection.</p>
-                                <div class="space-y-2 mb-6">
-                                    <div class="flex items-start">
-                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                            <i class="ri-check-line"></i>
-                                        </div>
-                                        <p class="text-sm text-gray-600">93% Detection accuracy</p>
+                                <h3 class="text-lg font-bold text-white mb-3">F2TRANS</h3>
+                                <p class="text-gray-400 text-sm mb-4">Face Forgery Detector using Transformer and Fourier analysis techniques.</p>
+                                
+                                <div class="mb-4">
+                                    <div class="flex items-start space-x-2 mb-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Transformer + Fourier analysis = <span class="text-primary">93%</span> Accuracy</p>
                                     </div>
-                                    <div class="flex items-start">
-                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                            <i class="ri-check-line"></i>
-                                        </div>
-                                        <p class="text-sm text-gray-600">Beats CNN approaches by +40% precision</p>
+                                    <div class="flex items-start space-x-2 mb-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Beats CNN by <span class="text-primary">+40%</span> precision</p>
                                     </div>
-                                    <div class="flex items-start">
-                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                            <i class="ri-check-line"></i>
-                                        </div>
-                                        <p class="text-sm text-gray-600">Featured on open-source AI hubs</p>
+                                    <div class="flex items-start space-x-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Featured on open-source AI hubs</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-between items-center">
-                                    <div class="flex space-x-2">
-                                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Python</span>
-                                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">AI/ML</span>
-                                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">TensorFlow</span>
-                                    </div>
-                                    <a href="#" class="text-primary hover:text-primary-dark transition-colors">
-                                        <div class="w-8 h-8 flex items-center justify-center">
-                                            <i class="ri-github-line ri-lg"></i>
+                                
+                                <div class="flex justify-between items-center mt-6">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                            <i class="ri-ai-generate text-primary"></i>
                                         </div>
+                                        <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                            <i class="ri-face-recognition-line text-primary"></i>
+                                        </div>
+                                        <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                            <i class="ri-python-line text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="text-primary hover:underline text-sm flex items-center">
+                                        <span>View Details</span>
+                                        <i class="ri-arrow-right-line ml-1"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="project-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="h-48 overflow-hidden">
-                                <img src="https://readdy.ai/api/search-image?query=college%20management%20system%20interface%2C%20educational%20dashboard%20with%20student%20data%2C%20academic%20management%20software%2C%20university%20administration%20system%2C%20clean%20modern%20UI%20design%20for%20education%20platform%2C%20data%20visualization%20for%20academic%20performance&width=600&height=400&seq=4&orientation=landscape" alt="College Management System" class="w-full h-full object-cover object-top">
+                        <div class="project-card bg-black bg-opacity-50 rounded-lg overflow-hidden">
+                            <div class="relative">
+                                <img src="https://readdy.ai/api/search-image?query=college%20management%20system%20interface%2C%20educational%20dashboard%2C%20student%20data%20management%2C%20academic%20operations%20software%2C%20modern%20UI%20design%2C%20digital%20interface%20for%20educational%20institution%2C%20detailed%20and%20realistic&width=600&height=400&seq=5&orientation=landscape" alt="College Management System" class="w-full h-48 object-cover object-top">
+                                <div class="absolute top-3 right-3 bg-primary text-black text-xs px-2 py-1 rounded-full">SECURE</div>
                             </div>
                             <div class="p-6">
-                                <div class="flex justify-between items-center mb-3">
-                                    <h3 class="text-xl font-bold text-gray-800">College Management System</h3>
-                                    <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">SECURE</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">A comprehensive Java-based system for automating academic operations with encrypted access control and analytics.</p>
-                                <div class="space-y-2 mb-6">
-                                    <div class="flex items-start">
-                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                            <i class="ri-check-line"></i>
-                                        </div>
-                                        <p class="text-sm text-gray-600">Automated academic operations (+70% efficiency)</p>
+                                <h3 class="text-lg font-bold text-white mb-3">COLLEGE MANAGEMENT SYSTEM</h3>
+                                <p class="text-gray-400 text-sm mb-4">Java & J2EE based system for automating academic operations with security.</p>
+                                
+                                <div class="mb-4">
+                                    <div class="flex items-start space-x-2 mb-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Automated academic ops (<span class="text-primary">+70%</span> efficiency)</p>
                                     </div>
-                                    <div class="flex items-start">
-                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                            <i class="ri-check-line"></i>
-                                        </div>
-                                        <p class="text-sm text-gray-600">Role-based encrypted access control</p>
+                                    <div class="flex items-start space-x-2 mb-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Encrypted access control</p>
                                     </div>
-                                    <div class="flex items-start">
-                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                            <i class="ri-check-line"></i>
-                                        </div>
-                                        <p class="text-sm text-gray-600">Real-time analytics dashboard for administrators</p>
+                                    <div class="flex items-start space-x-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Real-time analytics for admins</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-between items-center">
-                                    <div class="flex space-x-2">
-                                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Java</span>
-                                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">J2EE</span>
-                                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">SQL</span>
-                                    </div>
-                                    <a href="#" class="text-primary hover:text-primary-dark transition-colors">
-                                        <div class="w-8 h-8 flex items-center justify-center">
-                                            <i class="ri-external-link-line ri-lg"></i>
+                                
+                                <div class="flex justify-between items-center mt-6">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                            <i class="ri-java-fill text-primary"></i>
                                         </div>
+                                        <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                            <i class="ri-database-2-line text-primary"></i>
+                                        </div>
+                                        <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                            <i class="ri-lock-password-line text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="text-primary hover:underline text-sm flex items-center">
+                                        <span>View Details</span>
+                                        <i class="ri-arrow-right-line ml-1"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mt-12 text-center">
-                        <a href="#" class="inline-flex items-center gap-2 bg-white text-gray-800 px-6 py-3 rounded-button font-medium border border-gray-200 hover:border-primary hover:text-primary transition-all shadow-sm hover:shadow-md whitespace-nowrap">
-                            <i class="ri-github-line"></i>
-                            <span>View More Projects on GitHub</span>
-                        </a>
+                    <div class="text-gray-300 text-sm mt-4">
+                        <span class="text-primary">█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█</span>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- Experience Section -->
-        <section id="experience" class="py-16 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto">
-                    <div class="terminal-frame rounded-lg mb-12">
-                        <div class="terminal-header">
-                            <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                            <span>> show --experience.log</span>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <div class="terminal-container rounded-lg overflow-hidden mb-10">
+                        <div class="terminal-header px-4 py-2 flex items-center space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="text-xs text-gray-400 ml-2">show --experience.log</span>
                         </div>
-                        <div class="terminal-content bg-white">
-                            <div class="text-gray-800 font-mono">
-                                <div class="border border-gray-200 rounded mb-4 p-4">
-                                    <p class="mb-2">┌───[EMPLOYER: SD PRO SOLUTIONS]────────────┐</p>
-                                    <p class="mb-2">│ Role: IoT & Deep Learning Intern          │</p>
-                                    <p class="mb-4">│ Duration: 6 months                        │</p>
-                                    <p>└───────────────────────────────────────────┘</p>
+                        <div class="terminal-body p-4">
+                            <div class="bg-black bg-opacity-50 p-6 rounded-lg border border-primary border-opacity-20">
+                                <div class="text-gray-300 text-sm mb-4">
+                                    <span class="text-primary">┌───[EMPLOYER: SD PRO SOLUTIONS]────────────┐</span><br>
+                                    <span class="text-primary">│ Role: IoT & Deep Learning Intern          │</span><br>
+                                    <span class="text-primary">│ Duration: 6 months                        │</span><br>
+                                    <span class="text-primary">└───────────────────────────────────────────┘</span>
                                 </div>
-                                <p class="mb-2">> Engineered real-time object detection models.</p>
-                                <p class="mb-2">> Embedded AI in IoT systems with TensorFlow/OpenCV.</p>
-                                <p class="mb-2">> Boosted detection accuracy by 35%, cut training time 30%.</p>
-                                <p class="mb-2">> Reduced alert latency in smart devices by 40%.</p>
-                                <p>> Led sprint demos, wrote deployment SOPs (↑ dev speed 15%).</p>
-                            </div>
-                        </div>
-                        <div class="scanline"></div>
-                    </div>
-                    
-                    <div class="relative border-l-2 border-primary pl-8 ml-4">
-                        <div class="absolute w-4 h-4 bg-primary rounded-full -left-[9px] top-0"></div>
-                        
-                        <div class="mb-12">
-                            <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold text-gray-800">IoT & Deep Learning Intern</h3>
-                                <span class="bg-primary bg-opacity-10 text-primary text-sm px-3 py-1 rounded-full">2024 - Present</span>
-                            </div>
-                            <p class="text-lg text-gray-700 mb-2">SD PRO Solutions, Bengaluru</p>
-                            <p class="text-gray-600 mb-4">Worked on integrating AI capabilities into IoT systems for enhanced security and performance monitoring.</p>
-                            
-                            <div class="space-y-3">
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Engineered real-time object detection models for security applications</p>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Embedded AI algorithms in IoT systems using TensorFlow and OpenCV</p>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Boosted detection accuracy by 35% while reducing model training time by 30%</p>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Reduced alert latency in smart security devices by 40%</p>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Led sprint demos and wrote deployment SOPs that increased development speed by 15%</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="absolute w-4 h-4 bg-gray-300 rounded-full -left-[9px] top-[180px]"></div>
-                        
-                        <div class="mb-12">
-                            <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold text-gray-800">Research Assistant</h3>
-                                <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">2023 - 2024</span>
-                            </div>
-                            <p class="text-lg text-gray-700 mb-2">Garden City University, Bengaluru</p>
-                            <p class="text-gray-600 mb-4">Assisted faculty with research on deepfake detection and cybersecurity threat analysis.</p>
-                            
-                            <div class="space-y-3">
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Contributed to research paper on multi-cloud security published in IJRPR Journal</p>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Developed initial prototype for F2TRANS face forgery detection system</p>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Conducted literature review on emerging cybersecurity threats and countermeasures</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="absolute w-4 h-4 bg-gray-300 rounded-full -left-[9px] top-[360px]"></div>
-                        
-                        <div>
-                            <div class="flex flex-wrap justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold text-gray-800">Student Developer</h3>
-                                <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">2022 - 2023</span>
-                            </div>
-                            <p class="text-lg text-gray-700 mb-2">Government Polytechnic, Bijapur</p>
-                            <p class="text-gray-600 mb-4">Led development of the College Management System as part of academic project.</p>
-                            
-                            <div class="space-y-3">
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Designed and implemented a secure Java-based college management system</p>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Implemented role-based access control with encryption for sensitive data</p>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2 mt-0.5">
-                                        <i class="ri-check-line"></i>
-                                    </div>
-                                    <p class="text-gray-600">Created analytics dashboard for administrators to monitor academic performance</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="absolute w-4 h-4 bg-gray-300 rounded-full -left-[9px] bottom-0"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Education Section -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto">
-                    <div class="terminal-frame rounded-lg mb-12">
-                        <div class="terminal-header">
-                            <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                            <span>> cat --education.info</span>
-                        </div>
-                        <div class="terminal-content bg-white">
-                            <div class="text-gray-800 font-mono">
-                                <p class="mb-4">> BTech - CSE, Cybersecurity @ Garden City University</p>
-                                <p class="mb-4">[CGPA: 9.86 | 2023–2025]</p>
                                 
-                                <p class="mb-4">> Diploma - CS @ Government Polytechnic, Bijapur</p>
-                                <p class="mb-4">[CGPA: 9.39 | 2020–2023]</p>
-                                
-                                <p class="mb-4">> SSLC @ Sacred Heart Girls High School, Bangalore</p>
-                                <p>[Grade: 70.4% | 2020]</p>
-                            </div>
-                        </div>
-                        <div class="scanline"></div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-800">BTech - Computer Science & Engineering</h3>
-                                    <p class="text-gray-600">Specialization in Cybersecurity</p>
-                                </div>
-                                <span class="bg-primary bg-opacity-10 text-primary text-sm px-3 py-1 rounded-full whitespace-nowrap">2023 - 2025</span>
-                            </div>
-                            <p class="text-lg text-gray-700 mb-2">Garden City University, Bengaluru</p>
-                            <p class="text-gray-600 mb-4">CGPA: 9.86/10.0</p>
-                            
-                            <div class="space-y-2">
-                                <p class="text-gray-600">Key courses:</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Advanced Cryptography</span>
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Network Security</span>
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Ethical Hacking</span>
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">AI/ML</span>
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Cloud Security</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-800">Diploma in Computer Science</h3>
-                                    <p class="text-gray-600">Focus on Software Development</p>
-                                </div>
-                                <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full whitespace-nowrap">2020 - 2023</span>
-                            </div>
-                            <p class="text-lg text-gray-700 mb-2">Government Polytechnic, Bijapur</p>
-                            <p class="text-gray-600 mb-4">CGPA: 9.39/10.0</p>
-                            
-                            <div class="space-y-2">
-                                <p class="text-gray-600">Key courses:</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Java Programming</span>
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Database Systems</span>
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Web Development</span>
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Computer Networks</span>
-                                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Operating Systems</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-12">
-                        <div class="terminal-frame rounded-lg">
-                            <div class="terminal-header">
-                                <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                                <span>> unlock --certs.list</span>
-                            </div>
-                            <div class="terminal-content bg-white">
-                                <div class="text-gray-800 font-mono">
-                                    <p class="mb-2">[✓] IBM: Generative AI for Software Development</p>
-                                    <p class="mb-2">[✓] Cisco: Junior Cybersecurity Analyst Path</p>
-                                    <p class="mb-2">[✓] Cisco: Network Support and Security</p>
-                                    <p class="mb-2">[✓] Infosys: Hadoop Architecture & HDFS</p>
-                                    <p class="mb-2">[✓] Coursera: Effective Communication</p>
-                                    <p>[✓] Paper: Multi-Cloud Security (IJRPR Journal)</p>
-                                </div>
-                            </div>
-                            <div class="scanline"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Contact Section -->
-        <section id="contact" class="py-16 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <div class="max-w-5xl mx-auto">
-                    <div class="terminal-frame rounded-lg mb-12">
-                        <div class="terminal-header">
-                            <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                            <span>> connect --aneesa.z :: awaiting_input</span>
-                        </div>
-                        <div class="terminal-content bg-white">
-                            <div class="text-gray-800 font-mono">
-                                <p class="mb-2">> Email    : zoyaaneesa786@gmail.com</p>
-                                <p class="mb-2">> LinkedIn : linkedin.com/in/aneesa-z-7472442a4/</p>
-                                <p class="mb-4">> Portfolio: aneesazoya.github.io/Ane.github.io/</p>
-                                
-                                <p class="mb-2">> Phone    : +91 9513817850</p>
-                                <p class="mb-4">> Location : Bengaluru, Karnataka</p>
-                                
-                                <p>> [BEGIN TRANSMISSION...] [█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒]</p>
-                            </div>
-                        </div>
-                        <div class="scanline"></div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-800 mb-6">Get in Touch</h3>
-                            <p class="text-gray-600 mb-8">Have a project in mind or want to discuss collaboration opportunities? I'm always open to new challenges and opportunities.</p>
-                            
-                            <div class="space-y-6">
-                                <div class="flex items-start">
-                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4">
-                                        <i class="ri-mail-line text-primary"></i>
+                                <div class="mb-6">
+                                    <div class="flex items-start space-x-3 mb-3">
+                                        <div class="text-primary mt-1">></div>
+                                        <p class="text-gray-300 text-sm">Engineered real-time object detection models.</p>
                                     </div>
-                                    <div>
-                                        <p class="text-sm text-gray-500 mb-1">Email</p>
-                                        <a href="mailto:zoyaaneesa786@gmail.com" class="text-gray-800 hover:text-primary transition-colors">zoyaaneesa786@gmail.com</a>
+                                    <div class="flex items-start space-x-3 mb-3">
+                                        <div class="text-primary mt-1">></div>
+                                        <p class="text-gray-300 text-sm">Embedded AI in IoT systems with TensorFlow/OpenCV.</p>
+                                    </div>
+                                    <div class="flex items-start space-x-3 mb-3">
+                                        <div class="text-primary mt-1">></div>
+                                        <p class="text-gray-300 text-sm">Boosted detection accuracy by <span class="text-primary">35%</span>, cut training time <span class="text-primary">30%</span>.</p>
+                                    </div>
+                                    <div class="flex items-start space-x-3 mb-3">
+                                        <div class="text-primary mt-1">></div>
+                                        <p class="text-gray-300 text-sm">Reduced alert latency in smart devices by <span class="text-primary">40%</span>.</p>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <div class="text-primary mt-1">></div>
+                                        <p class="text-gray-300 text-sm">Led sprint demos, wrote deployment SOPs (↑ dev speed <span class="text-primary">15%</span>).</p>
                                     </div>
                                 </div>
                                 
-                                <div class="flex items-start">
-                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4">
-                                        <i class="ri-linkedin-line text-primary"></i>
+                                <div class="flex items-center space-x-3 mt-6">
+                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-robot-line text-primary text-xl"></i>
                                     </div>
-                                    <div>
-                                        <p class="text-sm text-gray-500 mb-1">LinkedIn</p>
-                                        <a href="https://linkedin.com/in/aneesa-z-7472442a4/" class="text-gray-800 hover:text-primary transition-colors">linkedin.com/in/aneesa-z-7472442a4/</a>
+                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-cpu-line text-primary text-xl"></i>
                                     </div>
-                                </div>
-                                
-                                <div class="flex items-start">
-                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4">
-                                        <i class="ri-github-line text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-500 mb-1">GitHub</p>
-                                        <a href="https://github.com/aneesazoya" class="text-gray-800 hover:text-primary transition-colors">github.com/aneesazoya</a>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start">
-                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4">
-                                        <i class="ri-phone-line text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-500 mb-1">Phone</p>
-                                        <a href="tel:+919513817850" class="text-gray-800 hover:text-primary transition-colors">+91 9513817850</a>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start">
-                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4">
-                                        <i class="ri-map-pin-line text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-500 mb-1">Location</p>
-                                        <p class="text-gray-800">Bengaluru, Karnataka, India</p>
+                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-device-line text-primary text-xl"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div>
-                            <div class="terminal-frame rounded-lg overflow-hidden">
-                                <div class="terminal-header">
-                                    <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                                    <div class="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-                                    <div class="w-3 h-3 rounded-full bg-green-400 mr-4"></div>
-                                    <span>> message.send("Hello Aneesa!")</span>
-                                </div>
-                                <div class="terminal-content bg-white p-6">
-                                    <form>
-                                        <div class="mb-4">
-                                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                                            <input type="text" id="name" class="w-full px-4 py-2 rounded border-none focus:ring-2 focus:ring-primary text-sm" placeholder="Enter your name">
-                                        </div>
-                                        
-                                        <div class="mb-4">
-                                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                            <input type="email" id="email" class="w-full px-4 py-2 rounded border-none focus:ring-2 focus:ring-primary text-sm" placeholder="Enter your email">
-                                        </div>
-                                        
-                                        <div class="mb-4">
-                                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                                            <input type="text" id="subject" class="w-full px-4 py-2 rounded border-none focus:ring-2 focus:ring-primary text-sm" placeholder="Enter subject">
-                                        </div>
-                                        
-                                        <div class="mb-6">
-                                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                                            <textarea id="message" rows="4" class="w-full px-4 py-2 rounded border-none focus:ring-2 focus:ring-primary text-sm" placeholder="Enter your message"></textarea>
-                                        </div>
-                                        
-                                        <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 whitespace-nowrap">
-                                            <i class="ri-send-plane-line"></i>
-                                            <span>Send Message</span>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="scanline"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div>
-                        <div class="flex items-center space-x-2 mb-6">
-                            <div class="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full">
-                                <i class="ri-shield-keyhole-line ri-lg"></i>
-                            </div>
-                            <span class="text-xl font-bold">Aneesa Z</span>
-                        </div>
-                        <p class="text-gray-300 mb-6">Passionate Computer Science Engineer blending intelligence, innovation, and security into every line of code.</p>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-gray-300 hover:text-primary transition-colors">
-                                <div class="w-8 h-8 flex items-center justify-center">
-                                    <i class="ri-linkedin-line ri-lg"></i>
-                                </div>
-                            </a>
-                            <a href="#" class="text-gray-300 hover:text-primary transition-colors">
-                                <div class="w-8 h-8 flex items-center justify-center">
-                                    <i class="ri-github-line ri-lg"></i>
-                                </div>
-                            </a>
-                            <a href="#" class="text-gray-300 hover:text-primary transition-colors">
-                                <div class="w-8 h-8 flex items-center justify-center">
-                                    <i class="ri-twitter-x-line ri-lg"></i>
-                                </div>
-                            </a>
-                            <a href="#" class="text-gray-300 hover:text-primary transition-colors">
-                                <div class="w-8 h-8 flex items-center justify-center">
-                                    <i class="ri-mail-line ri-lg"></i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-lg font-bold mb-6">Quick Links</h3>
-                        <ul class="space-y-3">
-                            <li>
-                                <a href="#about" class="text-gray-300 hover:text-primary transition-colors flex items-center">
-                                    <i class="ri-arrow-right-s-line mr-2"></i>
-                                    <span>About</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#skills" class="text-gray-300 hover:text-primary transition-colors flex items-center">
-                                    <i class="ri-arrow-right-s-line mr-2"></i>
-                                    <span>Skills</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#projects" class="text-gray-300 hover:text-primary transition-colors flex items-center">
-                                    <i class="ri-arrow-right-s-line mr-2"></i>
-                                    <span>Projects</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#experience" class="text-gray-300 hover:text-primary transition-colors flex items-center">
-                                    <i class="ri-arrow-right-s-line mr-2"></i>
-                                    <span>Experience</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#contact" class="text-gray-300 hover:text-primary transition-colors flex items-center">
-                                    <i class="ri-arrow-right-s-line mr-2"></i>
-                                    <span>Contact</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-lg font-bold mb-6">Contact Info</h3>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                    <i class="ri-mail-line"></i>
-                                </div>
-                                <span class="text-gray-300">zoyaaneesa786@gmail.com</span>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                    <i class="ri-phone-line"></i>
-                                </div>
-                                <span class="text-gray-300">+91 9513817850</span>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5">
-                                    <i class="ri-map-pin-line"></i>
-                                </div>
-                                <span class="text-gray-300">Bengaluru, Karnataka, India</span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 
-                <div class="border-t border-gray-700 mt-12 pt-8 text-center">
-                    <p class="text-gray-400">© 2025 Aneesa Z Nagarchi. All rights reserved.</p>
+                <div>
+                    <div class="terminal-container rounded-lg overflow-hidden mb-10">
+                        <div class="terminal-header px-4 py-2 flex items-center space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="text-xs text-gray-400 ml-2">cat --education.info</span>
+                        </div>
+                        <div class="terminal-body p-4">
+                            <div class="bg-black bg-opacity-50 p-6 rounded-lg border border-primary border-opacity-20">
+                                <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                                    <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-3">
+                                        <i class="ri-graduation-cap-line text-primary"></i>
+                                    </div>
+                                    Education
+                                </h3>
+                                
+                                <div class="mb-6 border-l-2 border-primary pl-4">
+                                    <div class="mb-4">
+                                        <h4 class="text-lg font-medium text-white">BTech - CSE, Cybersecurity</h4>
+                                        <p class="text-gray-400">Garden City University</p>
+                                        <div class="flex items-center mt-2">
+                                            <div class="bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full mr-2">CGPA: 9.86</div>
+                                            <div class="text-gray-500 text-xs">2023–2025</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h4 class="text-lg font-medium text-white">Diploma - CS</h4>
+                                        <p class="text-gray-400">Government Polytechnic, Bijapur</p>
+                                        <div class="flex items-center mt-2">
+                                            <div class="bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full mr-2">CGPA: 9.39</div>
+                                            <div class="text-gray-500 text-xs">2020–2023</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="text-lg font-medium text-white">SSLC</h4>
+                                        <p class="text-gray-400">Sacred Heart Girls High School, Bangalore</p>
+                                        <div class="flex items-center mt-2">
+                                            <div class="bg-primary bg-opacity-10 text-primary text-xs px-2 py-1 rounded-full mr-2">Grade: 70.4%</div>
+                                            <div class="text-gray-500 text-xs">2020</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-white mb-4 mt-8 flex items-center">
+                                    <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-3">
+                                        <i class="ri-award-line text-primary"></i>
+                                    </div>
+                                    Certifications
+                                </h3>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <div class="flex items-start space-x-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">IBM: Generative AI for Software Development</p>
+                                    </div>
+                                    <div class="flex items-start space-x-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Cisco: Junior Cybersecurity Analyst Path</p>
+                                    </div>
+                                    <div class="flex items-start space-x-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Cisco: Network Support and Security</p>
+                                    </div>
+                                    <div class="flex items-start space-x-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Infosys: Hadoop Architecture & HDFS</p>
+                                    </div>
+                                    <div class="flex items-start space-x-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Coursera: Effective Communication</p>
+                                    </div>
+                                    <div class="flex items-start space-x-2">
+                                        <div class="text-primary mt-1">✓</div>
+                                        <p class="text-gray-300 text-sm">Paper: Multi-Cloud Security (IJRPR Journal)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="terminal-container rounded-lg overflow-hidden mb-10">
+                <div class="terminal-header px-4 py-2 flex items-center space-x-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="text-xs text-gray-400 ml-2">connect --aneesa.z :: awaiting_input</span>
+                </div>
+                <div class="terminal-body p-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg border border-primary border-opacity-20">
+                            <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                                <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-3">
+                                    <i class="ri-message-3-line text-primary"></i>
+                                </div>
+                                Send Message
+                            </h3>
+                            
+                            <form>
+                                <div class="mb-4">
+                                    <label class="block text-gray-400 text-sm mb-2">Name</label>
+                                    <input type="text" class="w-full px-4 py-2 rounded focus:ring-2 focus:ring-primary focus:ring-opacity-50 text-sm" placeholder="Enter your name">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-gray-400 text-sm mb-2">Email</label>
+                                    <input type="email" class="w-full px-4 py-2 rounded focus:ring-2 focus:ring-primary focus:ring-opacity-50 text-sm" placeholder="Enter your email">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-gray-400 text-sm mb-2">Subject</label>
+                                    <input type="text" class="w-full px-4 py-2 rounded focus:ring-2 focus:ring-primary focus:ring-opacity-50 text-sm" placeholder="Enter subject">
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-gray-400 text-sm mb-2">Message</label>
+                                    <textarea rows="4" class="w-full px-4 py-2 rounded focus:ring-2 focus:ring-primary focus:ring-opacity-50 text-sm" placeholder="Enter your message"></textarea>
+                                </div>
+                                <button type="submit" class="w-full px-6 py-3 bg-primary text-black font-medium rounded-button hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+                                    <i class="ri-send-plane-fill mr-2"></i> Send Message
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="bg-black bg-opacity-50 p-6 rounded-lg border border-primary border-opacity-20">
+                            <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                                <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-3">
+                                    <i class="ri-contacts-line text-primary"></i>
+                                </div>
+                                Contact Information
+                            </h3>
+                            
+                            <div class="mb-6">
+                                <div class="flex items-center space-x-4 mb-4">
+                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-mail-line text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">Email</p>
+                                        <a href="mailto:zoyaaneesa786@gmail.com" class="text-white hover:text-primary">zoyaaneesa786@gmail.com</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-4 mb-4">
+                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-linkedin-box-fill text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">LinkedIn</p>
+                                        <a href="https://linkedin.com/in/aneesa-z-7472442a4/" target="_blank" class="text-white hover:text-primary">linkedin.com/in/aneesa-z-7472442a4/</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-4 mb-4">
+                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-global-line text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">Portfolio</p>
+                                        <a href="https://aneesazoya.github.io/Ane.github.io/" target="_blank" class="text-white hover:text-primary">aneesazoya.github.io/Ane.github.io/</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                                        <i class="ri-phone-line text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">Phone</p>
+                                        <a href="tel:+919513817850" class="text-white hover:text-primary">+91 9513817850</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8">
+                                <h4 class="text-lg font-medium text-white mb-4">Location</h4>
+                                <div class="rounded-lg overflow-hidden h-48 relative" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;">
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div class="bg-black bg-opacity-70 px-4 py-2 rounded">
+                                            <p class="text-white">Bengaluru, Karnataka, India</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <p class="text-gray-300 text-sm mb-2">> [BEGIN TRANSMISSION...] </p>
+                                <div class="progress-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-10 border-t border-primary border-opacity-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <div class="w-8 h-8 flex items-center justify-center bg-primary bg-opacity-10 rounded-full">
+                        <i class="ri-terminal-box-fill text-primary text-xl"></i>
+                    </div>
+                    <span class="text-primary font-bold">ANEESA.Z</span>
+                </div>
+                
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary hover:bg-opacity-20 transition-all duration-300">
+                        <i class="ri-github-fill"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary hover:bg-opacity-20 transition-all duration-300">
+                        <i class="ri-linkedin-box-fill"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary hover:bg-opacity-20 transition-all duration-300">
+                        <i class="ri-twitter-x-fill"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-10 rounded-full text-primary hover:bg-opacity-20 transition-all duration-300">
+                        <i class="ri-instagram-line"></i>
+                    </a>
+                </div>
+                
+                <div class="text-gray-500 text-sm">
+                    &copy; 2025 Aneesa Z Nagarchi. All rights reserved.
                 </div>
             </div>
         </div>
@@ -1274,170 +1033,53 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Skills Chart
-            const skillsChart = echarts.init(document.getElementById('skills-chart'));
-            
-            const option = {
-                animation: false,
-                radar: {
-                    indicator: [
-                        { name: 'Python', max: 100 },
-                        { name: 'Java', max: 100 },
-                        { name: 'Cybersecurity', max: 100 },
-                        { name: 'AI/ML', max: 100 },
-                        { name: 'IoT', max: 100 },
-                        { name: 'Web Dev', max: 100 }
-                    ],
-                    radius: '65%',
-                    splitNumber: 4,
-                    axisName: {
-                        color: '#1f2937',
-                        fontSize: 12
-                    },
-                    splitLine: {
-                        lineStyle: {
-                            color: 'rgba(0, 180, 216, 0.1)'
-                        }
-                    },
-                    splitArea: {
-                        show: true,
-                        areaStyle: {
-                            color: ['rgba(255, 255, 255, 0.8)', 'rgba(0, 180, 216, 0.05)']
-                        }
-                    },
-                    axisLine: {
-                        lineStyle: {
-                            color: 'rgba(0, 180, 216, 0.2)'
-                        }
-                    }
-                },
-                tooltip: {
-                    trigger: 'item',
-                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                    borderColor: 'rgba(0, 180, 216, 0.3)',
-                    textStyle: {
-                        color: '#1f2937'
-                    }
-                },
-                series: [{
-                    name: 'Technical Proficiency',
-                    type: 'radar',
-                    data: [
-                        {
-                            value: [95, 85, 90, 80, 85, 75],
-                            name: 'Skill Level',
-                            areaStyle: {
-                                color: 'rgba(87, 181, 231, 0.1)'
-                            },
-                            lineStyle: {
-                                color: 'rgba(87, 181, 231, 1)',
-                                width: 2
-                            },
-                            itemStyle: {
-                                color: 'rgba(87, 181, 231, 1)'
-                            }
-                        }
-                    ]
-                }]
-            };
-            
-            skillsChart.setOption(option);
-            
-            // Responsive chart resize
-            window.addEventListener('resize', function() {
-                skillsChart.resize();
-            });
-            
-            // Animate skill bars on scroll
-            const skillBars = document.querySelectorAll('.skill-progress');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.width = entry.target.style.width;
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            skillBars.forEach(bar => {
-                bar.style.width = '0';
-                observer.observe(bar);
-            });
-            
-            // Smooth scroll for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Mobile menu toggle
-            const menuButton = document.querySelector('.md\\:hidden button');
-            const mobileMenu = document.createElement('div');
-            mobileMenu.classList.add('mobile-menu', 'fixed', 'inset-0', 'bg-white', 'z-50', 'p-4', 'transform', 'translate-x-full', 'transition-transform', 'duration-300', 'ease-in-out');
-            mobileMenu.innerHTML = `
-                <div class="flex justify-between items-center mb-8">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full">
-                            <i class="ri-shield-keyhole-line ri-lg"></i>
-                        </div>
-                        <span class="text-xl font-bold text-gray-800">Aneesa Z</span>
-                    </div>
-                    <button class="text-gray-700 hover:text-primary focus:outline-none close-menu !rounded-button">
-                        <div class="w-8 h-8 flex items-center justify-center">
-                            <i class="ri-close-line ri-lg"></i>
-                        </div>
-                    </button>
-                </div>
-                <nav class="flex flex-col space-y-4">
-                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">About</a>
-                    <a href="#skills" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Skills</a>
-                    <a href="#projects" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Projects</a>
-                    <a href="#experience" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Experience</a>
-                    <a href="#contact" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Contact</a>
-                </nav>
-            `;
-            document.body.appendChild(mobileMenu);
-            
-            menuButton.addEventListener('click', function() {
-                mobileMenu.classList.remove('translate-x-full');
-            });
-            
-            mobileMenu.querySelector('.close-menu').addEventListener('click', function() {
-                mobileMenu.classList.add('translate-x-full');
-            });
-            
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.add('translate-x-full');
-                });
-            });
-            
-            // Matrix rain animation
-            function createMatrixRain() {
-                const matrixRainElements = document.querySelectorAll('.matrix-rain');
+            // Matrix effect
+            function createMatrixEffect() {
+                const container = document.querySelector('.terminal-body');
+                if (!container) return;
                 
-                matrixRainElements.forEach(el => {
-                    let text = '';
-                    for (let i = 0; i < 20; i++) {
-                        text += Math.round(Math.random()) ? '1' : '0';
-                    }
-                    el.textContent = text;
+                for (let i = 0; i < 20; i++) {
+                    const char = document.createElement('div');
+                    char.className = 'matrix-char';
+                    char.style.left = `${Math.random() * 100}%`;
+                    char.style.top = `${Math.random() * 100}%`;
+                    char.style.animationDelay = `${Math.random() * 2}s`;
+                    char.textContent = Math.random() > 0.5 ? '1' : '0';
+                    container.appendChild(char);
+                }
+            }
+            
+            // Create glitch effect
+            function createGlitchEffect() {
+                const elements = document.querySelectorAll('.glitch-effect');
+                elements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        el.style.animation = 'glitch 0.3s linear';
+                    });
+                    el.addEventListener('animationend', () => {
+                        el.style.animation = '';
+                    });
                 });
             }
             
-            createMatrixRain();
-            setInterval(createMatrixRain, 1000);
+            createMatrixEffect();
+            createGlitchEffect();
+            
+            // Custom checkbox functionality
+            const checkboxes = document.querySelectorAll('.custom-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    this.checked = !this.checked;
+                });
+            });
+            
+            // Custom switch functionality
+            const switches = document.querySelectorAll('.custom-switch input');
+            switches.forEach(switchEl => {
+                switchEl.addEventListener('change', function() {
+                    // Toggle functionality
+                });
+            });
         });
     </script>
 </body>
